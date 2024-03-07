@@ -15,32 +15,25 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-         Queue<TreeNode> queue = new LinkedList<>();
-    queue.add(root.left);
-    queue.add(root.right);
-
-    while(!queue.isEmpty()) {
-      TreeNode left = queue.poll();
-      TreeNode right = queue.poll();
-
-      if(left == null && right == null) {
-        continue;
-      }
-      
-      if(left == null || right == null) {
-        return false;
-      }
-
-      if (left.val != right.val) {
-        return false;
-      }
-
-      queue.add(left.left);
-      queue.add(right.right);
-      queue.add(left.right);
-      queue.add(right.left);
-      
-    }
-    return true;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root.left);
+        queue.add(root.right);
+        //reason we added left, and right so that next time LEFT and RIGHT new nodes can pick those two
+        while(!queue.isEmpty()){
+            TreeNode left = queue.poll();
+            TreeNode right = queue.poll();
+            
+            if(left == null && right == null) //mirrored nulls, ie fine
+                continue;
+            if(left == null || right == null) //not mirror on one of side is null
+                return false;
+            if(left.val != right.val)
+                return false;
+            queue.add(left.left);
+            queue.add(right.right);
+            queue.add(left.right);
+            queue.add(right.left);
+        }
+        return true;
     }
 }
