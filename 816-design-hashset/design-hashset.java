@@ -6,10 +6,10 @@ class MyHashSet {
     boolean[][] storage ;
 
     private int hash1(int key){
-        return key % 1000;
+        return key % bucket;
     }
      private int hash2(int key){
-        return key / 1000;
+        return key / bucketitems;
     }
     public MyHashSet() {
       this.storage = new boolean[bucket][];
@@ -27,11 +27,6 @@ class MyHashSet {
             }
             
         }
-
-        //below also works, 
-        // if (storage[h_id1] == null) {
-        //     storage[h_id1] = new boolean[bucketitems];
-        // }
         storage[h_id1][h_id2] = true;
     }
     
