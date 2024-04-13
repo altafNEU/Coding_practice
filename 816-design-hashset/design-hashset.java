@@ -1,49 +1,47 @@
 class MyHashSet {
 
-    int bucket = 1000;
-    int bucketitems = 1000;
-
-    boolean[][] storage ;
+    private boolean [][]storage;
+    int bucket,bucketitems;
+    public MyHashSet() {
+        this.bucket = 1000;
+        this.bucketitems = 1000;
+        this.storage = new boolean [bucket][];
+    }
 
     private int hash1(int key){
         return key % bucket;
     }
-     private int hash2(int key){
-        return key / bucketitems;
-    }
-    public MyHashSet() {
-      this.storage = new boolean[bucket][];
+    private int hash2(int key){
+        return key / bucket;
     }
     
     public void add(int key) {
-        int h_id1 = hash1(key);
-        int h_id2 = hash2(key);
-    
-        if( storage[h_id1] == null){
-            if(h_id1 == 0){
-                storage[h_id1] = new boolean[bucketitems + 1];
-            }else{
-                storage[h_id1] = new boolean[bucketitems];
+        int h1 = hash1(key);
+        int h2 = hash2(key);
+        if(storage[h1] == null){
+            if(h1 == 0){
+                storage[h1] = new boolean[bucketitems+1];
             }
-            
+            else
+                storage[h1] = new boolean[bucketitems];
         }
-        storage[h_id1][h_id2] = true;
+        storage[h1][h2] = true;
     }
     
     public void remove(int key) {
-        int h_id1 = hash1(key);
-        int h_id2 = hash2(key);
-        if( storage[h_id1] == null){
-            return ;}
-        storage[h_id1][h_id2] = false;  
+        int h1 = hash1(key);
+        int h2 = hash2(key);
+        if(storage[h1] == null)
+            return;
+        storage[h1][h2] = false;
     }
     
     public boolean contains(int key) {
-        int h_id1 = hash1(key);
-        int h_id2 = hash2(key);
-         if( storage[h_id1] == null){
-            return false;}
-        return storage[h_id1][h_id2] ;
+        int h1 = hash1(key);
+        int h2 = hash2(key);
+        if(storage[h1] == null)
+            return false;
+        return storage[h1][h2];
     }
 }
 
