@@ -1,16 +1,17 @@
 class MinStack {
     private int min = Integer.MAX_VALUE;
     Stack<Integer> stack;
+
     public MinStack() {
         stack = new Stack<>();
     }
     
     public void push(int val) {
         if(val <= min){
-            stack.push(min);
-            min = val;
+            stack.push(min); //push old min first,
+            min = val;      //then assign new min
         }
-        stack.push(val);
+        stack.push(val);  //push new min
     }
     
     public void pop() {
@@ -21,7 +22,7 @@ class MinStack {
     }
     
     public int top() {
-       return stack.peek();
+        return stack.peek();
     }
     
     public int getMin() {
