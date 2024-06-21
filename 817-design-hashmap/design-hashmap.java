@@ -1,6 +1,7 @@
 class MyHashMap {
     class Node{
         int key,value;
+        
         Node next;
         public Node(int key ,int value){
             this.key = key;
