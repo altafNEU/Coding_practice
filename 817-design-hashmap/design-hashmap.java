@@ -1,11 +1,10 @@
 class MyHashMap {
-    class Node{
-        int key,value;
-        
-        Node next;
-        public Node(int key ,int value){
+    class Node {
+        private int key, value;
+        private Node next;
+        public Node(int key , int value){
             this.key = key;
-            this.value = value;
+            this.value= value;
         }
     }
 
@@ -13,17 +12,12 @@ class MyHashMap {
     public MyHashMap() {
         this.storage = new Node[10000];
     }
-
-
-//////////////////////////////////////////  
-private int hash1(int key){         //private hash1 function
-        return key % 10000;
-    }
     
-//find function, to return node just before the placement node...
-//we could reach, and our target node could be last also, 
-//ie 2nd last or previous in this case
-private Node find_prev(Node node, int key){                        
+    private int hash1(int key){
+        return (key%10000);
+    }
+
+    private Node find_prev(Node node, int key){
         Node prev = null;
         Node curr = node;
 
@@ -33,39 +27,46 @@ private Node find_prev(Node node, int key){
         }
         return prev;
     }
-    //////////////////////////////////
     public void put(int key, int value) {
         int h_id = hash1(key);
+        Node newNode = new Node(key,value);
+
         if(storage[h_id] == null){
-            storage[h_id] = new Node(-1,-1);   //1.create new linklist Node
+            storage[h_id] = new Node(-1,-1);
         }
+
+        
         Node prev = find_prev(storage[h_id], key);
-        if(prev.next == null){          //2.if we reach end, so add our new neode
-            prev.next = new Node(key, value);
-        }else{                             //3.else it means the key already existing, hence 
-                                            //it means we need to update
+        if(prev.next == null){
+            prev.next = newNode;
+        }
+        if(prev.next.key == key){
             prev.next.value = value;
         }
-        
     }
     
     public int get(int key) {
         int h_id = hash1(key);
-        if(storage[h_id] == null){return -1;}           //1.if that linklist Node never existed,
-        Node prev = find_prev(storage[h_id], key);      
+        if(storage[h_id] == null)
+            return -1;
 
-        if(prev.next == null){return -1;}           //2.if we reach end, and never found
-        return prev.next.value;                     //3. we found , so return next of previous
+        Node prev = find_prev(storage[h_id], key);
+        if(prev.next == null)
+            return -1;
+        return prev.next.value;
     }
     
     public void remove(int key) {
         int h_id = hash1(key);
-        if(storage[h_id] == null){return ;}
+        if(storage [h_id] == null)
+            return;
         Node prev = find_prev(storage[h_id], key);
-
-        if(prev.next == null){return ;}
+        if(prev.next == null)
+            return;
+        
         prev.next = prev.next.next;
-        return ;    
+        
+        return;
     }
 }
 
