@@ -34,7 +34,7 @@ class Solution {
 
                if(map.get(c) != d)
 
-                   {set.add(d);
+                   {//set.add(d);
 
                    return false;}
 
