@@ -1,32 +1,46 @@
 class Solution {
     public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length())    return false;
 
-        Map<Character, Character> map = new HashMap<>();
-        Map<Character, Character> map2 = new HashMap<>();
-        for(int i = 0; i< s.length(); i++){
-            char key = s.charAt(i);
-            char value = t.charAt(i);
-            if(!map.containsKey(key)){
-                map.put(key, value);
-            }
-            if(map.containsKey(key)){
-                if(!map.get(key).equals(value))
-                    return false;
-               // else map.put(key, value);
-            }
-        }
-        for(int i = 0; i< t.length(); i ++){
-            char value = s.charAt(i);
-            char key = t.charAt(i);
-            if(!map2.containsKey(key)){
-                map2.put(key, value);
-            }
-            if(map2.containsKey(key)){
-                if(!map2.get(key).equals(value))
-                    return false;
-              //  else map.put(key, value);
-            }
-        }
+       HashMap<Character, Character> map = new HashMap<>();
+
+       HashSet<Character> set = new HashSet<>();
+
+       for(int i=0; i<s.length(); i++)
+
+       {
+
+           char c = s.charAt(i);
+
+           char d = t.charAt(i);
+
+           if(!map.containsKey(c))
+
+           {
+
+               if (set.contains(d))
+
+                   return false;
+
+               map.put(c, d);
+
+               set.add(d);
+
+           }
+
+           else
+
+           {
+
+               if(map.get(c) != d)
+
+                   {set.add(d);
+
+                   return false;}
+
+           }
+
+       }
         return true;
     }
 }
